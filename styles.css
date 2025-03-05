@@ -1,38 +1,80 @@
+/* styles.css - Updated UI for HVAC Study App */
+
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    margin: 0;
+    padding: 20px;
     text-align: center;
 }
 
-button {
-    padding: 10px;
-    margin: 5px;
-    cursor: pointer;
+/* Quiz Container */
+.quiz-container {
+    width: 90%;
+    max-width: 600px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
 }
 
-.option-btn {
+/* Question Styling */
+.question {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Answer Buttons */
+.answer-btn {
     display: block;
-    width: 80%;
-    margin: 10px auto;
-    padding: 10px;
-    border: 1px solid #000;
-    background-color: white;
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 8px;
+    background: #007bff;
+    color: white;
+    font-size: 16px;
     cursor: pointer;
+    transition: 0.3s;
+}
+.answer-btn:hover {
+    background: #0056b3;
+}
+.answer-btn.correct {
+    background: #28a745;
+}
+.answer-btn.wrong {
+    background: #dc3545;
 }
 
-.option-btn:hover {
-    background-color: #ddd;
+/* Progress Bar */
+.progress-container {
+    width: 100%;
+    background: #ddd;
+    border-radius: 8px;
+    margin: 15px 0;
+    height: 10px;
+    overflow: hidden;
+}
+.progress-bar {
+    height: 100%;
+    background: #007bff;
+    width: 0%;
+    transition: width 0.5s ease-in-out;
 }
 
-.hidden {
-    display: none;
-}
-
-.correct {
-    background-color: green;
-    color: white;
-}
-
-.wrong {
-    background-color: red;
-    color: white;
+/* Responsive Design */
+@media (max-width: 600px) {
+    .quiz-container {
+        width: 100%;
+        padding: 15px;
+    }
+    .answer-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
 }
