@@ -1,80 +1,138 @@
-/* styles.css - Updated UI for HVAC Study App */
-
-/* General Styles */
+/* 🔹 全局优化 */
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(to right, #f8f9fa, #e9ecef);
-    margin: 0;
-    padding: 20px;
+    font-size: 18px;
+    padding: 10px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* 🔹 标题优化 */
+h1 {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 🔹 选项按钮优化 */
+.option-btn {
+    width: 90%;
+    padding: 15px;
+    margin: 8px auto;
+    font-size: 20px;
+    border: 2px solid #ddd;
+    background-color: white;
+    cursor: pointer;
+    display: block;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+/* 🔹 按钮悬停效果 */
+.option-btn:hover {
+    background-color: #f5f5f5;
+}
+
+/* 🔹 选中正确答案 ✅ */
+.option-btn.correct {
+    background-color: #4CAF50; /* 绿色 */
+    color: white;
+    font-weight: bold;
+}
+
+/* 🔹 选中错误答案 ❌ */
+.option-btn.wrong {
+    background-color: #FF5733; /* 红色 */
+    color: white;
+    font-weight: bold;
+}
+
+/* 🔹 主要按钮（下一题 & 返回） */
+button {
+    width: 90%;
+    max-width: 300px;
+    padding: 15px;
+    font-size: 20px;
+    margin: 10px auto;
+    border-radius: 10px;
+    display: block;
+    font-weight: bold;
+    cursor: pointer;
     text-align: center;
 }
 
-/* Quiz Container */
-.quiz-container {
-    width: 90%;
-    max-width: 600px;
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin: auto;
-}
-
-/* Question Styling */
-.question {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-/* Answer Buttons */
-.answer-btn {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 8px;
-    background: #007bff;
+/* 🔹 下一题按钮（绿色） */
+#next-btn {
+    background-color: #4CAF50;
     color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.answer-btn:hover {
-    background: #0056b3;
-}
-.answer-btn.correct {
-    background: #28a745;
-}
-.answer-btn.wrong {
-    background: #dc3545;
+    border: none;
 }
 
-/* Progress Bar */
-.progress-container {
-    width: 100%;
-    background: #ddd;
-    border-radius: 8px;
-    margin: 15px 0;
-    height: 10px;
-    overflow: hidden;
+/* 🔹 返回章节选择按钮（蓝色） */
+#back-btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
 }
+
+/* 🔹 进度条优化 */
+.progress-container {
+    width: 90%;
+    height: 15px;
+    background-color: #ddd;
+    border-radius: 10px;
+    margin: 15px auto;
+}
+
 .progress-bar {
-    height: 100%;
-    background: #007bff;
+    height: 15px;
     width: 0%;
+    background-color: #4CAF50;
+    border-radius: 10px;
     transition: width 0.5s ease-in-out;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-    .quiz-container {
-        width: 100%;
-        padding: 15px;
+/* 🔹 选项区域调整（竖向排列） */
+#options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 🔹 适配小屏幕 */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 16px;
+        padding: 5px;
     }
-    .answer-btn {
-        font-size: 14px;
-        padding: 10px;
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .option-btn, button {
+        font-size: 18px;
+        padding: 14px;
+    }
+}
+
+/* 🔹 适配超小屏幕 */
+@media screen and (max-width: 480px) {
+    body {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .option-btn {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 12px;
     }
 }
