@@ -11,13 +11,17 @@
 
     <button id="language-switch">Switch to English</button>
 
-    <p>进度: <span id="progress">0 / 0</span></p>
-    <p>正确率: <span id="accuracy">0%</span></p>
-
     <div id="quiz-container">
         <p id="question-text">加载中...</p>
         <div id="options"></div>
-        <p id="explanation" class="hidden"></p>
+
+        <!-- 进度条 -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <p id="progress-text">进度: 0%</p>
+
+        <p id="explanation" class="hidden"></p> <!-- 解析部分 -->
         <button id="next-btn" class="hidden">下一题</button>
         <button id="back-btn">返回章节选择</button>
     </div>
