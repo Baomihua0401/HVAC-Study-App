@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const optionsContainer = document.getElementById("options");
     const explanationText = document.getElementById("explanation");
     const languageSwitch = document.getElementById("language-switch");
-    const progressText = document.getElementById("progress");
-    const accuracyText = document.getElementById("accuracy");
+    const progressText = document.getElementById("progress-text");
+    const progressBar = document.getElementById("progress-bar");
 
     let currentLanguage = localStorage.getItem("language") || "cn";
     let currentQuestionIndex = 0;
@@ -24,10 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let mistakes = JSON.parse(localStorage.getItem("mistakes")) || [];
     let completedChapters = JSON.parse(localStorage.getItem("completedChapters")) || [];
 
-    // 获取当前章节
     let currentChapter = questions[0].chapter;
 
-    // **✅ 如果用户重新选择已完成章节，先移除"已完成"状态**
+    // ✅ **如果重新选择已完成章节，移除完成状态**
     if (completedChapters.includes(currentChapter)) {
         completedChapters = completedChapters.filter(ch => ch !== currentChapter);
         localStorage.setItem("completedChapters", JSON.stringify(completedChapters));
@@ -46,6 +45,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateLanguageButton();
 
+    function updateProgress() {
+        let progress = (currentQuestionIndex / questions.length) * 100;
+        progressBar.style.width = `${progress}%`;
+        progressText.textContent = `进度: ${Math.round(progress)}%`;
+    }
+
     function loadQuestion() {
         let question = questions[currentQuestionIndex];
         questionText.textContent = (currentLanguage === "cn") ? question.question_cn : question.question_en;
@@ -63,6 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         explanationText.classList.add("hidden");
         nextButton.classList.add("hidden");
+
+        updateProgress();
     }
 
     function checkAnswer(selectedIndex, correctIndex) {
@@ -79,10 +86,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (selectedIndex === correctIndex) {
             correctAnswers++;
-            // ✅ **如果做对错题，从错题列表移除**
             mistakes = mistakes.filter(q => q.question_en !== questions[currentQuestionIndex].question_en);
         } else {
-            // ✅ **如果选错，并且不在错题列表，添加进去**
             if (!mistakes.some(q => q.question_en === questions[currentQuestionIndex].question_en)) {
                 mistakes.push(questions[currentQuestionIndex]);
             }
@@ -95,8 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         nextButton.classList.remove("hidden");
 
-        progressText.textContent = `${currentQuestionIndex + 1} / ${questions.length}`;
-        accuracyText.textContent = `${Math.round((correctAnswers / (currentQuestionIndex + 1)) * 100)}%`;
+        updateProgress();
     }
 
     nextButton.addEventListener("click", function () {
@@ -107,7 +111,6 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             alert(`🎉 章节完成！正确率: ${Math.round((correctAnswers / questions.length) * 100)}%`);
 
-            // ✅ **只有 "所有题目都完成" 且 "没有错题" 才标记章节已完成**
             if (!completedChapters.includes(currentChapter) && mistakes.length === 0) {
                 completedChapters.push(currentChapter);
                 localStorage.setItem("completedChapters", JSON.stringify(completedChapters));
